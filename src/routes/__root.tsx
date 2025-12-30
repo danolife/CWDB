@@ -16,6 +16,7 @@ import type { QueryClient } from '@tanstack/react-query';
 
 import type { TRPCRouter } from '@/integrations/trpc/router';
 import type { TRPCOptionsProxy } from '@trpc/tanstack-react-query';
+import { Provider } from '@/integrations/tanstack-query/root-provider.tsx';
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -56,7 +57,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Header />
-        {children}
+        <Provider>{children}</Provider>
         <TanStackDevtools
           config={{
             position: 'bottom-right',

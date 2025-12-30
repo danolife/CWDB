@@ -5,11 +5,6 @@ import { useTRPC } from '@/integrations/trpc/react';
 
 export const Route = createFileRoute('/demo/trpc-todo')({
   component: TRPCTodos,
-  loader: async ({ context }) => {
-    await context.queryClient.prefetchQuery(
-      context.trpc.todos.list.queryOptions(),
-    );
-  },
 });
 
 function TRPCTodos() {

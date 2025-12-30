@@ -6,6 +6,7 @@ import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query';
 import type { TRPCRouter } from '@/integrations/trpc/router';
 
 import { TRPCProvider } from '@/integrations/trpc/react';
+import type { PropsWithChildren } from 'react';
 
 function getUrl() {
   const base = (() => {
@@ -13,6 +14,26 @@ function getUrl() {
     return `http://localhost:${process.env.PORT ?? 3000}`;
   })();
   return `${base}/api/trpc`;
+}
+
+function makeQueryClient() {
+  return new QueryClient({
+    defaultOptions: {
+      dehydrate: { serializeData: superjson.serialize },
+      hydrate: { deserializeData: superjson.deserialize },
+    },
+  });
+}
+
+let browserQueryClient: QueryClient | undefined = undefined;
+function getQueryClient() {
+  if (typeof window === 'undefined') {
+    // Server: always make a new query client
+    return makeQueryClient();
+  } else {
+    if (!browserQueryClient) browserQueryClient = makeQueryClient();
+    return browserQueryClient;
+  }
 }
 
 export const trpcClient = createTRPCClient<TRPCRouter>({
@@ -25,12 +46,7 @@ export const trpcClient = createTRPCClient<TRPCRouter>({
 });
 
 export function getContext() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      dehydrate: { serializeData: superjson.serialize },
-      hydrate: { deserializeData: superjson.deserialize },
-    },
-  });
+  const queryClient = getQueryClient();
 
   const serverHelpers = createTRPCOptionsProxy({
     client: trpcClient,
@@ -42,15 +58,9 @@ export function getContext() {
   };
 }
 
-export function Provider({
-  children,
-  queryClient,
-}: {
-  children: React.ReactNode;
-  queryClient: QueryClient;
-}) {
+export function Provider({ children }: PropsWithChildren) {
   return (
-    <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
+    <TRPCProvider trpcClient={trpcClient} queryClient={getQueryClient()}>
       {children}
     </TRPCProvider>
   );
