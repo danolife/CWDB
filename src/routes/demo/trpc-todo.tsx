@@ -1,33 +1,33 @@
-import { useCallback, useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { useTRPC } from '@/integrations/trpc/react'
+import { useCallback, useState } from 'react';
+import { createFileRoute } from '@tanstack/react-router';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useTRPC } from '@/integrations/trpc/react';
 
 export const Route = createFileRoute('/demo/trpc-todo')({
   component: TRPCTodos,
   loader: async ({ context }) => {
     await context.queryClient.prefetchQuery(
       context.trpc.todos.list.queryOptions(),
-    )
+    );
   },
-})
+});
 
 function TRPCTodos() {
-  const trpc = useTRPC()
-  const { data, refetch } = useQuery(trpc.todos.list.queryOptions())
+  const trpc = useTRPC();
+  const { data, refetch } = useQuery(trpc.todos.list.queryOptions());
 
-  const [todo, setTodo] = useState('')
+  const [todo, setTodo] = useState('');
   const { mutate: addTodo } = useMutation({
     ...trpc.todos.add.mutationOptions(),
     onSuccess: () => {
-      refetch()
-      setTodo('')
+      refetch();
+      setTodo('');
     },
-  })
+  });
 
   const submitTodo = useCallback(() => {
-    addTodo({ name: todo })
-  }, [addTodo, todo])
+    addTodo({ name: todo });
+  }, [addTodo, todo]);
 
   return (
     <div
@@ -56,7 +56,7 @@ function TRPCTodos() {
             onChange={(e) => setTodo(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                submitTodo()
+                submitTodo();
               }
             }}
             placeholder="Enter a new todo..."
@@ -72,5 +72,5 @@ function TRPCTodos() {
         </div>
       </div>
     </div>
-  )
+  );
 }
