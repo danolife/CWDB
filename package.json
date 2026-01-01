@@ -6,7 +6,6 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "db:migrate": "npx drizzle-kit migrate",
-    "deploy": "npx netlify deploy --prod",
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
