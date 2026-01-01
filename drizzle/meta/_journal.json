@@ -36,6 +36,13 @@
       "when": 1767293449904,
       "tag": "0004_reorder_word_columns",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1767295005512,
+      "tag": "0005_simplify_generated_columns",
+      "breakpoints": true
     }
   ]
 }
