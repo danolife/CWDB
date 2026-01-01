@@ -9,9 +9,9 @@ export const Route = createFileRoute('/demo/trpc-todo')({
 
 function TRPCTodos() {
   const trpc = useTRPC();
-  const { data, refetch } = useQuery(trpc.todos.list.queryOptions());
-
   const [todo, setTodo] = useState('');
+  const { data, refetch } = useQuery(trpc.todos.list.queryOptions(todo));
+
   const { mutate: addTodo } = useMutation({
     ...trpc.todos.add.mutationOptions(),
     onSuccess: () => {
@@ -33,7 +33,7 @@ function TRPCTodos() {
       }}
     >
       <div className="w-full max-w-2xl p-8 rounded-xl backdrop-blur-md bg-black/50 shadow-xl border-8 border-black/10">
-        <h1 className="text-2xl mb-4">tRPC Todos list</h1>
+        <h1 className="text-2xl mb-4">tRPC Todos list ({data?.length})</h1>
         <ul className="mb-4 space-y-2">
           {data?.map((t) => (
             <li
