@@ -1,3 +1,3 @@
 [build]
-  command = "npm run build && pwd && ls -lah /opt/build/repo/dist && npm run db:migrate"
+  command = "npm run build && npm run db:migrate"
   publish = "dist"
