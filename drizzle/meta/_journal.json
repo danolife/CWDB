@@ -8,6 +8,20 @@
       "when": 1767279119677,
       "tag": "0000_unknown_killraven",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1767291400054,
+      "tag": "0001_enable_unaccent",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1767292502708,
+      "tag": "0002_immutable_unnacent",
+      "breakpoints": true
     }
   ]
 }

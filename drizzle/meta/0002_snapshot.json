@@ -1,0 +1,59 @@
+{
+  "id": "e49f4666-4b8d-4d5d-9d54-c7181c4475dc",
+  "prevId": "4736512c-66b9-40b7-8bc0-36bb65b5785a",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.words": {
+      "name": "words",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "word": {
+          "name": "word",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "letter1": {
+          "name": "letter1",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "words_word_unique": {
+          "name": "words_word_unique",
+          "columns": [
+            "word"
+          ],
+          "nullsNotDistinct": false
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "views": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
