@@ -1,6 +1,8 @@
 import type { TRPCRouterRecord } from '@trpc/server';
 import { publicProcedure } from '@/domains/trpc/init.ts';
 import { z } from 'zod';
+import { db } from '@/domains/db';
+import { wordsTable } from '@/domains/db/schema.ts';
 
 const todos = [
   { id: 1, name: 'Get groceries' },
@@ -9,7 +11,9 @@ const todos = [
 ];
 
 export const todosRouter = {
-  list: publicProcedure.query(() => todos),
+  list: publicProcedure.query(() => {
+    return db.select().from(wordsTable);
+  }),
   add: publicProcedure
     .input(z.object({ name: z.string() }))
     .mutation(({ input }) => {
