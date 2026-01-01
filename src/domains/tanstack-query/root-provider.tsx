@@ -3,9 +3,9 @@ import superjson from 'superjson';
 import { createTRPCClient, httpBatchStreamLink } from '@trpc/client';
 import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query';
 
-import type { TRPCRouter } from '@/integrations/trpc/router';
+import type { TRPCRouter } from '@/domains/trpc/router.ts';
 
-import { TRPCProvider } from '@/integrations/trpc/react';
+import { TRPCProvider } from '@/domains/trpc/react.ts';
 import type { PropsWithChildren } from 'react';
 
 function getUrl() {
