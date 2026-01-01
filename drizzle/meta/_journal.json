@@ -29,6 +29,13 @@
       "when": 1767292536775,
       "tag": "0003_add_generated_letter_columns",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1767293449904,
+      "tag": "0004_reorder_word_columns",
+      "breakpoints": true
     }
   ]
 }

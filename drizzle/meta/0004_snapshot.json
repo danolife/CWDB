@@ -1,0 +1,464 @@
+{
+  "id": "d87e0048-a88b-42e3-b025-785c17109820",
+  "prevId": "d124eee6-ebd5-45c1-800f-2851fcde4f97",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.words": {
+      "name": "words",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "word": {
+          "name": "word",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "length": {
+          "name": "length",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "generated": {
+            "type": "stored",
+            "as": "LENGTH(IMMUTABLE_UNACCENT(\"words\".\"word\"))"
+          }
+        },
+        "letter1": {
+          "name": "letter1",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 1, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 1, 1))) ELSE NULL END"
+          }
+        },
+        "letter2": {
+          "name": "letter2",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 2, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 2, 1))) ELSE NULL END"
+          }
+        },
+        "letter3": {
+          "name": "letter3",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 3, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 3, 1))) ELSE NULL END"
+          }
+        },
+        "letter4": {
+          "name": "letter4",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 4, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 4, 1))) ELSE NULL END"
+          }
+        },
+        "letter5": {
+          "name": "letter5",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 5, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 5, 1))) ELSE NULL END"
+          }
+        },
+        "letter6": {
+          "name": "letter6",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 6, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 6, 1))) ELSE NULL END"
+          }
+        },
+        "letter7": {
+          "name": "letter7",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 7, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 7, 1))) ELSE NULL END"
+          }
+        },
+        "letter8": {
+          "name": "letter8",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 8, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 8, 1))) ELSE NULL END"
+          }
+        },
+        "letter9": {
+          "name": "letter9",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 9, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 9, 1))) ELSE NULL END"
+          }
+        },
+        "letter10": {
+          "name": "letter10",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 10, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 10, 1))) ELSE NULL END"
+          }
+        },
+        "letter11": {
+          "name": "letter11",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 11, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 11, 1))) ELSE NULL END"
+          }
+        },
+        "letter12": {
+          "name": "letter12",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 12, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 12, 1))) ELSE NULL END"
+          }
+        },
+        "letter13": {
+          "name": "letter13",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 13, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 13, 1))) ELSE NULL END"
+          }
+        },
+        "letter14": {
+          "name": "letter14",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 14, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 14, 1))) ELSE NULL END"
+          }
+        },
+        "letter15": {
+          "name": "letter15",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 15, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 15, 1))) ELSE NULL END"
+          }
+        },
+        "letter16": {
+          "name": "letter16",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE WHEN SUBSTRING(\"words\".\"word\", 16, 1) IS NOT NULL THEN IMMUTABLE_UNACCENT(UPPER(SUBSTRING(\"words\".\"word\", 16, 1))) ELSE NULL END"
+          }
+        }
+      },
+      "indexes": {
+        "words_letter1_index": {
+          "name": "words_letter1_index",
+          "columns": [
+            {
+              "expression": "letter1",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter2_index": {
+          "name": "words_letter2_index",
+          "columns": [
+            {
+              "expression": "letter2",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter3_index": {
+          "name": "words_letter3_index",
+          "columns": [
+            {
+              "expression": "letter3",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter4_index": {
+          "name": "words_letter4_index",
+          "columns": [
+            {
+              "expression": "letter4",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter5_index": {
+          "name": "words_letter5_index",
+          "columns": [
+            {
+              "expression": "letter5",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter6_index": {
+          "name": "words_letter6_index",
+          "columns": [
+            {
+              "expression": "letter6",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter7_index": {
+          "name": "words_letter7_index",
+          "columns": [
+            {
+              "expression": "letter7",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter8_index": {
+          "name": "words_letter8_index",
+          "columns": [
+            {
+              "expression": "letter8",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter9_index": {
+          "name": "words_letter9_index",
+          "columns": [
+            {
+              "expression": "letter9",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter10_index": {
+          "name": "words_letter10_index",
+          "columns": [
+            {
+              "expression": "letter10",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter11_index": {
+          "name": "words_letter11_index",
+          "columns": [
+            {
+              "expression": "letter11",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter12_index": {
+          "name": "words_letter12_index",
+          "columns": [
+            {
+              "expression": "letter12",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter13_index": {
+          "name": "words_letter13_index",
+          "columns": [
+            {
+              "expression": "letter13",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter14_index": {
+          "name": "words_letter14_index",
+          "columns": [
+            {
+              "expression": "letter14",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter15_index": {
+          "name": "words_letter15_index",
+          "columns": [
+            {
+              "expression": "letter15",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "words_letter16_index": {
+          "name": "words_letter16_index",
+          "columns": [
+            {
+              "expression": "letter16",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "words_word_unique": {
+          "name": "words_word_unique",
+          "columns": [
+            "word"
+          ],
+          "nullsNotDistinct": false
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "views": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
