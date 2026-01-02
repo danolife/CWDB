@@ -16,12 +16,9 @@ export const wordsTable = pgTable(
     word: text().unique().notNull(),
     length: integer()
       .notNull()
-      .generatedAlwaysAs(
-        (): SQL => sql`LENGTH(${wordsTable.word})`,
-      ),
+      .generatedAlwaysAs((): SQL => sql`LENGTH(${wordsTable.word})`),
     letter1: varchar({ length: 1 }).generatedAlwaysAs(
-      (): SQL =>
-        sql`SUBSTRING(${wordsTable.word}, 1, 1)`,
+      (): SQL => sql`SUBSTRING(${wordsTable.word}, 1, 1)`,
     ),
     letter2: varchar({ length: 1 }).generatedAlwaysAs(
       (): SQL =>
@@ -83,7 +80,7 @@ export const wordsTable = pgTable(
       (): SQL =>
         sql`CASE WHEN LENGTH(${wordsTable.word}) >= 16 THEN SUBSTRING(${wordsTable.word}, 16, 1) ELSE NULL END`,
     ),
-  } as any,
+  },
   (table) => [
     index().on(table.length),
     index().on(table.letter1),
