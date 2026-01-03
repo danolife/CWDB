@@ -1,19 +1,11 @@
-import {
-  index,
-  integer,
-  pgTable,
-  text,
-  uuid,
-  varchar,
-} from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
+import { index, integer, pgTable, text, varchar } from 'drizzle-orm/pg-core';
 import type { SQL } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 
 export const wordsTable = pgTable(
   'words',
   {
-    id: uuid().primaryKey().defaultRandom(),
-    word: text().unique().notNull(),
+    word: text().primaryKey().notNull(),
     length: integer()
       .notNull()
       .generatedAlwaysAs((): SQL => sql`LENGTH(${wordsTable.word})`),
