@@ -7,6 +7,7 @@ import type { TRPCRouter } from '@/domains/trpc/router.ts';
 
 import { TRPCProvider } from '@/domains/trpc/react.ts';
 import type { PropsWithChildren } from 'react';
+import { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
 
 function getUrl() {
   const base = (() => {
@@ -35,6 +36,9 @@ function getQueryClient() {
     return browserQueryClient;
   }
 }
+
+export type RouterInput = inferRouterInputs<TRPCRouter>;
+export type RouterOutput = inferRouterOutputs<TRPCRouter>;
 
 export const trpcClient = createTRPCClient<TRPCRouter>({
   links: [

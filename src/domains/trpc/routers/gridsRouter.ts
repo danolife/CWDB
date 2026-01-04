@@ -1,4 +1,4 @@
-import type { TRPCRouterRecord } from '@trpc/server';
+import { TRPCError, TRPCRouterRecord } from '@trpc/server';
 import { publicProcedure } from '@/domains/trpc/init.ts';
 import { z } from 'zod';
 import { db } from '@/domains/db';
@@ -37,7 +37,9 @@ export const gridsRouter = {
       .limit(1);
 
     if (result.length === 0) {
-      throw new Error('Grid not found');
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+      });
     }
 
     return {
