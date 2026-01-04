@@ -57,6 +57,13 @@
       "when": 1767460360237,
       "tag": "0007_grid",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1767474706427,
+      "tag": "0008_auth",
+      "breakpoints": true
     }
   ]
 }

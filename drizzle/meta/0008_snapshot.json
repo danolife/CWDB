@@ -1,0 +1,1061 @@
+{
+  "id": "e3f7e3cf-a1af-4292-baf7-711d6539efd5",
+  "prevId": "ca5bfd19-9b22-44b5-a9ee-7622292cde3c",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.definitions": {
+      "name": "definitions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "word": {
+          "name": "word",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "definition": {
+          "name": "definition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "definitions_word_index": {
+          "name": "definitions_word_index",
+          "columns": [
+            {
+              "expression": "word",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "definitions_word_words_word_fk": {
+          "name": "definitions_word_words_word_fk",
+          "tableFrom": "definitions",
+          "tableTo": "words",
+          "columnsFrom": [
+            "word"
+          ],
+          "columnsTo": [
+            "word"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.grid_definitions": {
+      "name": "grid_definitions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "definition_id": {
+          "name": "definition_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "grid_id": {
+          "name": "grid_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "x": {
+          "name": "x",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "y": {
+          "name": "y",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "direction": {
+          "name": "direction",
+          "type": "direction",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "position",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "grid_definitions_definition_id_index": {
+          "name": "grid_definitions_definition_id_index",
+          "columns": [
+            {
+              "expression": "definition_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "grid_definitions_grid_id_index": {
+          "name": "grid_definitions_grid_id_index",
+          "columns": [
+            {
+              "expression": "grid_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "grid_definitions_definition_id_definitions_id_fk": {
+          "name": "grid_definitions_definition_id_definitions_id_fk",
+          "tableFrom": "grid_definitions",
+          "tableTo": "definitions",
+          "columnsFrom": [
+            "definition_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "grid_definitions_grid_id_grids_id_fk": {
+          "name": "grid_definitions_grid_id_grids_id_fk",
+          "tableFrom": "grid_definitions",
+          "tableTo": "grids",
+          "columnsFrom": [
+            "grid_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.grids": {
+      "name": "grids",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "width": {
+          "name": "width",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "height": {
+          "name": "height",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.words": {
+      "name": "words",
+      "schema": "",
+      "columns": {
+        "word": {
+          "name": "word",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "length": {
+          "name": "length",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "generated": {
+            "as": "LENGTH(\"words\".\"word\")",
+            "type": "stored"
+          }
+        },
+        "letter1": {
+          "name": "letter1",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "SUBSTRING(\"words\".\"word\", 1, 1)",
+            "type": "stored"
+          }
+        },
+        "letter2": {
+          "name": "letter2",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 2 THEN SUBSTRING(\"words\".\"word\", 2, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter3": {
+          "name": "letter3",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 3 THEN SUBSTRING(\"words\".\"word\", 3, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter4": {
+          "name": "letter4",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 4 THEN SUBSTRING(\"words\".\"word\", 4, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter5": {
+          "name": "letter5",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 5 THEN SUBSTRING(\"words\".\"word\", 5, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter6": {
+          "name": "letter6",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 6 THEN SUBSTRING(\"words\".\"word\", 6, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter7": {
+          "name": "letter7",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 7 THEN SUBSTRING(\"words\".\"word\", 7, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter8": {
+          "name": "letter8",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 8 THEN SUBSTRING(\"words\".\"word\", 8, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter9": {
+          "name": "letter9",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 9 THEN SUBSTRING(\"words\".\"word\", 9, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter10": {
+          "name": "letter10",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 10 THEN SUBSTRING(\"words\".\"word\", 10, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter11": {
+          "name": "letter11",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 11 THEN SUBSTRING(\"words\".\"word\", 11, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter12": {
+          "name": "letter12",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 12 THEN SUBSTRING(\"words\".\"word\", 12, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter13": {
+          "name": "letter13",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 13 THEN SUBSTRING(\"words\".\"word\", 13, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter14": {
+          "name": "letter14",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 14 THEN SUBSTRING(\"words\".\"word\", 14, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter15": {
+          "name": "letter15",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 15 THEN SUBSTRING(\"words\".\"word\", 15, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        },
+        "letter16": {
+          "name": "letter16",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN LENGTH(\"words\".\"word\") >= 16 THEN SUBSTRING(\"words\".\"word\", 16, 1) ELSE NULL END",
+            "type": "stored"
+          }
+        }
+      },
+      "indexes": {
+        "words_length_index": {
+          "name": "words_length_index",
+          "columns": [
+            {
+              "expression": "length",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter1_index": {
+          "name": "words_letter1_index",
+          "columns": [
+            {
+              "expression": "letter1",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter2_index": {
+          "name": "words_letter2_index",
+          "columns": [
+            {
+              "expression": "letter2",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 2",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter3_index": {
+          "name": "words_letter3_index",
+          "columns": [
+            {
+              "expression": "letter3",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 3",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter4_index": {
+          "name": "words_letter4_index",
+          "columns": [
+            {
+              "expression": "letter4",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 4",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter5_index": {
+          "name": "words_letter5_index",
+          "columns": [
+            {
+              "expression": "letter5",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 5",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter6_index": {
+          "name": "words_letter6_index",
+          "columns": [
+            {
+              "expression": "letter6",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 6",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter7_index": {
+          "name": "words_letter7_index",
+          "columns": [
+            {
+              "expression": "letter7",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 7",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter8_index": {
+          "name": "words_letter8_index",
+          "columns": [
+            {
+              "expression": "letter8",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 8",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter9_index": {
+          "name": "words_letter9_index",
+          "columns": [
+            {
+              "expression": "letter9",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 9",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter10_index": {
+          "name": "words_letter10_index",
+          "columns": [
+            {
+              "expression": "letter10",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 10",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter11_index": {
+          "name": "words_letter11_index",
+          "columns": [
+            {
+              "expression": "letter11",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 11",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter12_index": {
+          "name": "words_letter12_index",
+          "columns": [
+            {
+              "expression": "letter12",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 12",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter13_index": {
+          "name": "words_letter13_index",
+          "columns": [
+            {
+              "expression": "letter13",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 13",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter14_index": {
+          "name": "words_letter14_index",
+          "columns": [
+            {
+              "expression": "letter14",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 14",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter15_index": {
+          "name": "words_letter15_index",
+          "columns": [
+            {
+              "expression": "letter15",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 15",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "words_letter16_index": {
+          "name": "words_letter16_index",
+          "columns": [
+            {
+              "expression": "letter16",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"length\" >= 16",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.account": {
+      "name": "account",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider_id": {
+          "name": "provider_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token_expires_at": {
+          "name": "access_token_expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refresh_token_expires_at": {
+          "name": "refresh_token_expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "account_userId_idx": {
+          "name": "account_userId_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "account_user_id_user_id_fk": {
+          "name": "account_user_id_user_id_fk",
+          "tableFrom": "account",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.session": {
+      "name": "session",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "session_userId_idx": {
+          "name": "session_userId_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "session_user_id_user_id_fk": {
+          "name": "session_user_id_user_id_fk",
+          "tableFrom": "session",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "session_token_unique": {
+          "name": "session_token_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "token"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email_verified": {
+          "name": "email_verified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "user_email_unique": {
+          "name": "user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.verification": {
+      "name": "verification",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "identifier": {
+          "name": "identifier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "verification_identifier_idx": {
+          "name": "verification_identifier_idx",
+          "columns": [
+            {
+              "expression": "identifier",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.direction": {
+      "name": "direction",
+      "schema": "public",
+      "values": [
+        "across",
+        "down"
+      ]
+    },
+    "public.position": {
+      "name": "position",
+      "schema": "public",
+      "values": [
+        "bottom",
+        "right"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
