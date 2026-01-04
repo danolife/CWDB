@@ -4,17 +4,12 @@ import { z } from 'zod';
 import { db } from '@/domains/db';
 import { wordsTable } from '@/domains/db/schema.ts';
 import { and, eq, sql } from 'drizzle-orm';
-import { unaccent } from '@/domains/utils/utils.ts';
+
+import { normalizePattern } from '@/lib/utils.ts';
 
 export const wordsRouter = {
   pattern: publicProcedure
-    .input(
-      z.string().transform((val) =>
-        unaccent(val)
-          .toUpperCase()
-          .replace(/[^A-Z*]+/g, ''),
-      ),
-    )
+    .input(z.string().transform(normalizePattern))
     .query(({ input }) => {
       return db
         .select({

@@ -10,18 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoTrpcTodoRouteImport } from './routes/demo/trpc-todo'
+import { Route as WordsChar123WordChar125RouteImport } from './routes/words/{-$word}'
 import { Route as ApiTrpcSplatRouteImport } from './routes/api.trpc.$'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiAuthSplatRouteImport } from './routes/api.auth.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoTrpcTodoRoute = DemoTrpcTodoRouteImport.update({
-  id: '/demo/trpc-todo',
-  path: '/demo/trpc-todo',
+const WordsChar123WordChar125Route = WordsChar123WordChar125RouteImport.update({
+  id: '/words/{-$word}',
+  path: '/words/{-$word}',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiTrpcSplatRoute = ApiTrpcSplatRouteImport.update({
@@ -37,34 +37,34 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/demo/trpc-todo': typeof DemoTrpcTodoRoute
+  '/words/{-$word}': typeof WordsChar123WordChar125Route
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demo/trpc-todo': typeof DemoTrpcTodoRoute
+  '/words/{-$word}': typeof WordsChar123WordChar125Route
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/demo/trpc-todo': typeof DemoTrpcTodoRoute
+  '/words/{-$word}': typeof WordsChar123WordChar125Route
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo/trpc-todo' | '/api/auth/$' | '/api/trpc/$'
+  fullPaths: '/' | '/words/{-$word}' | '/api/auth/$' | '/api/trpc/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo/trpc-todo' | '/api/auth/$' | '/api/trpc/$'
-  id: '__root__' | '/' | '/demo/trpc-todo' | '/api/auth/$' | '/api/trpc/$'
+  to: '/' | '/words/{-$word}' | '/api/auth/$' | '/api/trpc/$'
+  id: '__root__' | '/' | '/words/{-$word}' | '/api/auth/$' | '/api/trpc/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DemoTrpcTodoRoute: typeof DemoTrpcTodoRoute
+  WordsChar123WordChar125Route: typeof WordsChar123WordChar125Route
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiTrpcSplatRoute: typeof ApiTrpcSplatRoute
 }
@@ -78,11 +78,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/trpc-todo': {
-      id: '/demo/trpc-todo'
-      path: '/demo/trpc-todo'
-      fullPath: '/demo/trpc-todo'
-      preLoaderRoute: typeof DemoTrpcTodoRouteImport
+    '/words/{-$word}': {
+      id: '/words/{-$word}'
+      path: '/words/{-$word}'
+      fullPath: '/words/{-$word}'
+      preLoaderRoute: typeof WordsChar123WordChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/trpc/$': {
@@ -104,7 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DemoTrpcTodoRoute: DemoTrpcTodoRoute,
+  WordsChar123WordChar125Route: WordsChar123WordChar125Route,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiTrpcSplatRoute: ApiTrpcSplatRoute,
 }
